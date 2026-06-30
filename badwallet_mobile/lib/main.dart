@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'features/auth/providers/auth_provider.dart';
 import 'features/transfers/providers/transfer_provider.dart';
+import 'features/bills/providers/bills_provider.dart';
 import 'features/dashboard/providers/dashboard_provider.dart';
 import 'core/theme/app_theme.dart';
 import 'core/routes/app_routes.dart';
@@ -29,6 +30,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<AuthProvider, TransferProvider>(
           create: (_) => TransferProvider(),
           update: (_, auth, transfer) => transfer!..setPhoneNumber(auth.phoneNumber ?? ''),
+        ),
+        ChangeNotifierProxyProvider<AuthProvider, BillsProvider>(
+          create: (_) => BillsProvider(),
+          update: (_, auth, bills) => bills!..setPhoneNumber(auth.phoneNumber ?? ''),
         ),
       ],
       child: MaterialApp(
