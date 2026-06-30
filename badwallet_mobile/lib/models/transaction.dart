@@ -18,6 +18,7 @@ class Transaction {
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
+    print('Transaction.fromJson: $json'); // <-- LOG
     return Transaction(
       id: json['id'],
       type: json['type'],

@@ -11,6 +11,7 @@ class WalletService {
       final response = await _dio.get('/api/wallets/$phone');
       return Wallet.fromJson(response.data);
     } catch (e) {
+      print('Erreur getWalletByPhone: $e');
       throw Exception('Erreur lors de la récupération du wallet');
     }
   }
@@ -18,8 +19,11 @@ class WalletService {
   Future<double> getBalance(String phone) async {
     try {
       final response = await _dio.get('/api/wallets/$phone/balance');
+      print('getBalance response data: ${response.data}'); // <-- LOG
+      print('getBalance response type: ${response.data.runtimeType}'); // <-- LOG
       return (response.data as num).toDouble();
     } catch (e) {
+      print('Erreur getBalance: $e');
       throw Exception('Erreur lors de la récupération du solde');
     }
   }
@@ -27,9 +31,12 @@ class WalletService {
   Future<List<Transaction>> getTransactions(String phone) async {
     try {
       final response = await _dio.get('/api/wallets/$phone/transactions');
+      print('getTransactions response data: ${response.data}'); // <-- LOG
+      print('getTransactions response type: ${response.data.runtimeType}'); // <-- LOG
       final List<dynamic> data = response.data;
       return data.map((json) => Transaction.fromJson(json)).toList();
     } catch (e) {
+      print('Erreur getTransactions: $e');
       throw Exception('Erreur lors de la récupération des transactions');
     }
   }

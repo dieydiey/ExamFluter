@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      await authProvider.setPhoneNumber(_phoneController.text);
+                      await authProvider.setPhoneNumber(_phoneController.text.trim());
                       if (mounted) {
                         Navigator.pushReplacementNamed(context, AppRoutes.dashboard);
                       }
