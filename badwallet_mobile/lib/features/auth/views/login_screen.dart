@@ -7,12 +7,18 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,10 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Image.asset('assets/logo.png', width: 100, height: 100),
               const SizedBox(height: 30),
-              const Text('Bienvenue sur BadWallet', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              const Text(
+                'Bienvenue sur BadWallet',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: _phoneController,
@@ -48,15 +57,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    await authProvider.setPhoneNumber(_phoneController.text);
-                    Navigator.pushReplacementNamed(context, AppRoutes.dashboard);
-                  }
-                },
-                child: const Text('Se connecter'),
-                style: ElevatedButton.styleFrom(minimumSize: const Size(double.infinity, 50)),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await authProvider.setPhoneNumber(_phoneController.text);
+                      if (mounted) {
+                        Navigator.pushReplacementNamed(context, AppRoutes.dashboard);
+                      }
+                    }
+                  },
+                  child: const Text('Se connecter'),
+                ),
               ),
             ],
           ),

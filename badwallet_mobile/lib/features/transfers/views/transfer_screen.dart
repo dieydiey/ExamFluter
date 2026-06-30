@@ -52,11 +52,13 @@ class TransferScreen extends StatelessWidget {
               if (isLoading) const CircularProgressIndicator(),
               if (error != null) Text(error, style: const TextStyle(color: Colors.red)),
               if (success) const Text('Transfert réussi !', style: TextStyle(color: Colors.green)),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: isLoading ? null : () => transferProvider.transfer(),
-                child: const Text('Transférer'),
-                style: ElevatedButton.styleFrom(minimumSize: const Size(double.infinity, 50)),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: isLoading ? null : () => transferProvider.transfer(),
+                  child: const Text('Transférer'),
+                ),
               ),
             ],
           ),

@@ -23,7 +23,7 @@ class BillsScreen extends StatelessWidget {
           children: [
             DropdownButtonFormField<String>(
               decoration: const InputDecoration(labelText: 'Fournisseur'),
-              value: billsProvider.selectedService,
+              initialValue: billsProvider.selectedService,
               items: services.map((service) {
                 return DropdownMenuItem(value: service, child: Text(service));
               }).toList(),
@@ -56,10 +56,13 @@ class BillsScreen extends StatelessWidget {
               ),
             ),
             if (billsProvider.selectedReferences.isNotEmpty)
-              ElevatedButton(
-                onPressed: billsProvider.paySelected,
-                child: Text('Payer (${billsProvider.selectedReferences.length})'),
-                style: ElevatedButton.styleFrom(minimumSize: const Size(double.infinity, 50)),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: billsProvider.paySelected,
+                  child: Text('Payer (${billsProvider.selectedReferences.length})'),
+                ),
               ),
           ],
         ),

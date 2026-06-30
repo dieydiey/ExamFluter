@@ -7,7 +7,7 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
@@ -21,10 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
     await authProvider.loadPhoneNumber();
     await Future.delayed(const Duration(seconds: 2));
-    if (authProvider.phoneNumber != null) {
-      Navigator.pushReplacementNamed(context, AppRoutes.dashboard);
-    } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.login);
+    if (mounted) {
+      if (authProvider.phoneNumber != null) {
+        Navigator.pushReplacementNamed(context, AppRoutes.dashboard);
+      } else {
+        Navigator.pushReplacementNamed(context, AppRoutes.login);
+      }
     }
   }
 
@@ -37,7 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.asset('assets/logo.png', width: 150, height: 150),
             const SizedBox(height: 20),
-            const Text('BadWallet', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+            const Text(
+              'BadWallet',
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 10),
             const CircularProgressIndicator(),
           ],

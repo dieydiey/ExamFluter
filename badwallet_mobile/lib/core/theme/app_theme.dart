@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     primaryColor: const Color(0xFF1A237E),
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-      primary: const Color(0xFF1A237E),
-      secondary: const Color(0xFF0D47A1),
+    colorScheme: const ColorScheme.light().copyWith(
+      primary: Color(0xFF1A237E),
+      secondary: Color(0xFF0D47A1),
     ),
     textTheme: GoogleFonts.poppinsTextTheme(),
     appBarTheme: const AppBarTheme(
@@ -23,8 +23,8 @@ class AppTheme {
         padding: const EdgeInsets.symmetric(vertical: 16),
       ),
     ),
-    cardTheme: CardTheme(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    cardTheme: const CardThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(16))),
       elevation: 4,
     ),
   );
